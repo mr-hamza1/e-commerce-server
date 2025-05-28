@@ -31,7 +31,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions));
+app.options('/api/*', cors(corsOptions)); // ✅ limit to API routes only
 
 // Middleware
 app.use(express.json());
