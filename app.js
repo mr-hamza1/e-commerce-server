@@ -31,7 +31,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.options('/api/v1/*', cors(corsOptions)); //  This works
+app.options('/api/v1/:path*', cors(corsOptions)); // ✅ Handles CORS preflight correctly
 
 // Middleware
 app.use(express.json());
