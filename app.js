@@ -59,6 +59,9 @@ app.use("/api/v1/order", ordersRoutes)
 app.use("/api/v1/payment", paymentRoutes)
 app.use("/api/v1/dashboard", dashboardRoutes)
 
+app.get("/", (req, res) => {
+    res.send(`HELLO HAMZA AHMAD ANWAR ----${process.env.CLIENT_URL}`)
+})
 
 
 
@@ -67,3 +70,6 @@ app.use(errorMiddelware)
 app.listen(port, ()=>{
     console.log(`server is listening on port ${port}`)
 })
+
+
+export default app;
