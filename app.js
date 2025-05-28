@@ -1,12 +1,12 @@
 import express from 'express';
-import userRoutes from '../routes/user.js';
-import productRoutes from '../routes/product.js';
-import ordersRoutes from '../routes/orders.js';
-import paymentRoutes from '../routes/payment.js';
-import dashboardRoutes from '../routes/adminStats.js';
-import { connectDB } from '../utils/feature.js';
+import userRoutes from './routes/user.js';
+import productRoutes from './routes/product.js';
+import ordersRoutes from './routes/orders.js';
+import paymentRoutes from './routes/payment.js';
+import dashboardRoutes from './routes/adminStats.js';
+import { connectDB } from './utils/feature.js';
 import dotenv from 'dotenv';
-import { errorMiddelware } from '../middelwares/error.js';
+import { errorMiddelware } from './middelwares/error.js';
 import cookieParser from 'cookie-parser';
 import { v2 as cloudinary } from 'cloudinary';
 import NodeCache from 'node-cache';
@@ -21,6 +21,7 @@ const app = express();
 // Connect to DB
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/";
 connectDB(mongoURI);
+const port = process.env.PORT
 
 // CORS
 const corsOptions = {
