@@ -25,11 +25,13 @@ const port = process.env.PORT
 
 // CORS
 const corsOptions = {
-  origin: [process.env.CLIENT_URL],
+  origin: [process.env.CLIENT_URL, "https://e-commerce-frontend-bice-two.vercel.app/"],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
 app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 // Middleware
 app.use(express.json());
