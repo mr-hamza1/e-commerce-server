@@ -1,5 +1,4 @@
 import express from 'express';
-import serverless from 'serverless-http'; // ✅ Important
 import userRoutes from '../routes/user.js';
 import productRoutes from '../routes/product.js';
 import ordersRoutes from '../routes/orders.js';
