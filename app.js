@@ -31,7 +31,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-app.options('/api/*', cors(corsOptions)); //  limit to API routes only
+app.options('/api/v1/*', cors(corsOptions)); //  This works
 
 // Middleware
 app.use(express.json());
@@ -62,9 +62,6 @@ app.get("/", (req, res) => {
   res.send("API is working");
 });
 
-app.get("/", (req, res) => {
-    res.send(`HELLO HAMZA AHMAD ANWAR ----${process.env.CLIENT_URL}`)
-})
 
 
 
