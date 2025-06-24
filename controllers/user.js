@@ -25,11 +25,11 @@ const newUser = TryCatch(async(req, res, next)=>{
      
      console.log(user)
 
-      await sendEmail({
-    to: user.email,
-    subject: "Login Notification",
-    text: `Hi ${user.name},\n\nYou have successfully logged in to your Lootlo account.\n\nIf this wasn't you, please secure your account immediately.`,
-  });
+  //     await sendEmail({
+  //   to: user.email,
+  //   subject: "Login Notification",
+  //   text: `Hi ${user.name},\n\nYou have successfully logged in to your Lootlo account.\n\nIf this wasn't you, please secure your account immediately.`,
+  // });
 
 
      sendToken(res, user, 201, `Successfully Signup ${user.name}!`);
