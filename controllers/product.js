@@ -72,24 +72,29 @@ const getLatestProduct = TryCatch(async(req, res, next) => {
 
 } )
 
-const getAllCategories= TryCatch(async(req, res, next) => {
+const getAllCategories = TryCatch(async (req, res, next) => {
+  let combinedCategories;
 
-  let categories;
+  if (myCache.has("categories")) {
+    combinedCategories = JSON.parse(myCache.get("categories"));
+  } else {
+    const categoriesByProduct = await Product.distinct("category");
+    const categoriesByType = await Product.distinct("details.category");
 
-  if(myCache.has("categories")){
-    categories = JSON.parse(myCache.get("categories"))
+    combinedCategories = [
+      ...categoriesByType,
+      ...categoriesByProduct,
+    ];
+
+    myCache.set("categories", JSON.stringify(combinedCategories));
   }
-  else{
-    categories = await Product.distinct("category")
-    myCache.set("categories", JSON.stringify(categories))
-  }
 
-    return res.status(200).json({
-        success: true,
-        categories,
-      })
+  return res.status(200).json({
+    success: true,
+    categories:combinedCategories,
+  });
+});
 
-} )
 
 const getAdminProducts = TryCatch(async(req, res, next) => {
   
@@ -272,7 +277,7 @@ const searchAllProduct = TryCatch(async(req, res, next) => {
 
   const {search, category, price,  sort} = req.query;
 
-  console.log(sort)
+  console.log(category)
 
   const page = Number(req.query.page) || 1;
   const limit = Number(process.env.LIMIT) || 12;
@@ -295,10 +300,13 @@ const searchAllProduct = TryCatch(async(req, res, next) => {
     console.log(category)
 
   if(category){
-
-       baseQuery.category = category;
-
-  }  
+     
+if (["electronics", "fashion", "beauty", "sports"].includes(category)) {
+  baseQuery["details.category"] = category;
+} else {
+  baseQuery.category = category;
+}
+} 
   
   const [products, filterProducts] = await Promise.all([
     await Product.find(baseQuery)
