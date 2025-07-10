@@ -71,7 +71,7 @@ const logout = TryCatch(async (req, res) => {
 
   console.log("logout!")
 
-   res.clearCookie("E-commerce", {
+  return res.clearCookie("E-commerce", {
   maxAge: 0,
   sameSite: "none",
   httpOnly: true,
