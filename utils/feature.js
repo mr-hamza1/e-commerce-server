@@ -12,7 +12,7 @@ const cookieOptions = {
   sameSite: "none",
   httpOnly: true,
   secure: true,
-  domain: "e-commerce-server-self.vercel.app",
+  path: "/",
 }
 
 const connectDB = (uri)=>{
