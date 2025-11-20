@@ -7,13 +7,13 @@ import { myCache } from "../app.js";
 import { ErrorHandler } from "./errorHandler.js";
 
 
-res.cookie("token", value, {
+const cookieOptions = {
   maxAge: 15 * 24 * 60 * 60 * 1000,
   sameSite: "none",
   httpOnly: true,
   secure: true,
   domain: "e-commerce-server-self.vercel.app",
-});
+}
 
 const connectDB = (uri)=>{
     mongoose.connect(uri,{dbName: "E-commerce"})
