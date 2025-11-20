@@ -66,17 +66,22 @@ const login = TryCatch(async (req, res, next) => {
   sendToken(res, user, 200, `Welcome Back ${user.name}`);
 });
 
-
 const logout = TryCatch(async (req, res) => {
+  console.log("logging out...");
 
-  console.log("logout!")
-
-  return res.clearCookie("E-commerce", {...cookieOptions, maxAge: 0}).json({
+  return res
+    .clearCookie("E-commerce", {
+      sameSite: "none",
+      httpOnly: true,
+      secure: true,
+      path: "/",
+      maxAge: 0
+    })
+    .json({
       success: true,
-      message: "Logout successfully!",
+      message: "Logout successful!",
     });
 });
-
 
 
 
